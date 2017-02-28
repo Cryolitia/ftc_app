@@ -9,8 +9,8 @@ import com.qualcomm.robotcore.hardware.Servo;
  * Created by cxs on 2017/2/3.
  */
 
-@TeleOp(name = "sbManualText", group = "OpMode")
-public class sbmanualtext extends OpMode {
+@TeleOp(name = "manualText", group = "OpMode")
+public class manualtext extends OpMode {
 
     DcMotor leftmotor;
     DcMotor rightmotor;
