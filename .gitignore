@@ -1,6 +1,6 @@
 # built application files
-*.apk
 *.ap_
+ftc_app-beta/doc/apk
 
 # Java class files
 *.class
