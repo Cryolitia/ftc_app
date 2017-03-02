@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.Servo;
  * Created by cxs on 2017/2/3.
  */
 
-@TeleOp(name = "manualText", group = "OpMode")
+@TeleOp(name = "manualText")
 public class manualtext extends OpMode {
 
     DcMotor leftmotor;
@@ -52,20 +52,25 @@ public class manualtext extends OpMode {
 
         xa = gamepad1.left_stick_x;
         ya = gamepad1.left_stick_y;
+        xb = gamepad2.left_stick_x;
+        yb = gamepad2.left_stick_y;
 
-        if (xa != 0 || ya != 0) {
-            leftmotor.setPower((ya - xa) / 2);
-            rightmotor.setPower(0 - ((ya + xa) / 2));
-        }
+        if (gamepad1.dpad_up == false && gamepad1.dpad_down == false && gamepad1.dpad_left == false && gamepad1.dpad_right == false) {
 
-        if (xb != 0 || yb != 0) {
-            xb = gamepad2.left_stick_x;
-            yb = gamepad2.left_stick_y;
-        }
+            if (xa != 0 || ya != 0) {
+                leftmotor.setPower((ya - xa) / 2);
+                rightmotor.setPower(0 - ((ya + xa) / 2));
+            }
 
-        if (xa == 0 && xb == 0 && ya == 0 && yb == 0) {
-            leftmotor.setPower(0);
-            rightmotor.setPower(0);
+            if (xb != 0 || yb != 0) {
+                rightmotor.setPower((yb - xb) / 2);
+                leftmotor.setPower(0 - ((yb + xb) / 2));
+            }
+
+            if (xa == 0 && xb == 0 && ya == 0 && yb == 0) {
+                leftmotor.setPower(0);
+                rightmotor.setPower(0);
+            }
         }
 
         if (gamepad1.y) {
@@ -105,25 +110,17 @@ public class manualtext extends OpMode {
         } else if (gamepad2.dpad_down) {
             hold.setPower(-0.3);
         } else if (gamepad1.dpad_up) {
-            while (gamepad1.dpad_up) {
-                leftmotor.setPower(-1);
-                rightmotor.setPower(1);
-            }
+            leftmotor.setPower(-1);
+            rightmotor.setPower(1);
         } else if (gamepad1.dpad_down) {
-            while (gamepad1.dpad_down) {
-                leftmotor.setPower(1);
-                rightmotor.setPower(-1);
-            }
+            leftmotor.setPower(1);
+            rightmotor.setPower(-1);
         } else if (gamepad1.dpad_left) {
-            while (gamepad1.dpad_left) {
-                leftmotor.setPower(1);
-                rightmotor.setPower(1);
-            }
+            leftmotor.setPower(1);
+            rightmotor.setPower(1);
         } else if (gamepad1.dpad_right) {
-            while (gamepad1.dpad_right) {
-                leftmotor.setPower(-1);
-                rightmotor.setPower(-1);
-            }
+            leftmotor.setPower(-1);
+            rightmotor.setPower(-1);
         } else {
             fire.setPower(0);
             hold.setPower(0);

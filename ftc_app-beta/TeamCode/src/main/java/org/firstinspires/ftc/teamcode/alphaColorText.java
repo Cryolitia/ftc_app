@@ -1,63 +1,94 @@
 package org.firstinspires.ftc.teamcode;
 
-import android.view.View;
-import android.graphics.Color;
 import android.app.Activity;
+import android.graphics.Color;
+import android.view.View;
 
+import com.qualcomm.ftccommon.DbgLog;
 import com.qualcomm.ftcrobotcontroller.R;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DeviceInterfaceModule;
+import com.qualcomm.robotcore.hardware.DigitalChannelController;
+import com.qualcomm.robotcore.hardware.LED;
 
-/**
- * Created by FTC on 2017/2/28.
- */
-
-@TeleOp(name = "alphaColorText")
-public class alphacolortext extends OpMode {
-
+@TeleOp (name = "colorText")
+public class alphacolortext extends LinearOpMode {
     ColorSensor SensorRGB;
+    DeviceInterfaceModule cdim;
+
+    static final int LED_CHANNEL = 5;
 
     @Override
-    public void init () {
+    public void runOpMode () throws InterruptedException {
 
         hardwareMap.logDevices();
 
+        cdim = hardwareMap.deviceInterfaceModule.get("dim");
+
+        cdim.setDigitalChannelMode(LED_CHANNEL, DigitalChannelController.Mode.OUTPUT);
+
         SensorRGB = hardwareMap.colorSensor.get("color");
 
-    }
+        boolean bEnabled = true;
 
-    public void loop () {
+        cdim.setDigitalChannelState(LED_CHANNEL, bEnabled);
+
+        waitOneFullHardwareCycle();
+
+        waitForStart();
 
         float hsvValues[] = {0F,0F,0F};
+
         final float values[] = hsvValues;
+
         final View relativeLayout = ((Activity)
                 hardwareMap.appContext).findViewById(R.id.RelativeLayout);
 
-        Color.RGBToHSV((SensorRGB.red() * 255) / 800, (SensorRGB.green() * 255) / 800, (SensorRGB.blue() * 255) / 800, hsvValues);
-        telemetry.addData("Clear", SensorRGB.alpha());
-        telemetry.addData("Red  ", SensorRGB.red());
-        telemetry.addData("Green", SensorRGB.green());
-        telemetry.addData("Blue ", SensorRGB.blue());
-        telemetry.addData("Hue", hsvValues[0]);
+        boolean bPrevState = false;
+        boolean bCurrState = false;
 
-        relativeLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                relativeLayout.setBackgroundColor(Color.HSVToColor(0XFF, values));
+        while (opModeIsActive()) {
+
+            bCurrState = gamepad1.x || gamepad2.x;
+            if (bCurrState == true && bCurrState != bPrevState) {
+
+                DbgLog.msg("MY_DEUG - x button was pressed!");
+
+                bPrevState = bCurrState;
+
+                bEnabled = true;
+
+                cdim.setDigitalChannelState(LED_CHANNEL, bEnabled);
+
+            } else  if (bCurrState == false && bCurrState != bPrevState) {
+
+                DbgLog.msg("MY_DEUG - x button was released!");
+
+                bPrevState = bCurrState;
+
+                bEnabled = false;
+
+                cdim.setDigitalChannelState(LED_CHANNEL, bEnabled);
+
             }
-        });
 
-        try {
-            Thread.sleep(500);
-        }
+            Color.RGBToHSV((SensorRGB.red()*255)/800, (SensorRGB.green()*255)/800, (SensorRGB.blue()*255)/800, hsvValues);
 
-        catch (InterruptedException e) {
-            e.printStackTrace();
+            telemetry.addData("Clear", SensorRGB.alpha());
+            telemetry.addData("Red  ", SensorRGB.red());
+            telemetry.addData("Green", SensorRGB.green());
+            telemetry.addData("Blue ", SensorRGB.blue());
+            telemetry.addData("Hue  ", hsvValues[0]);
+
+            relativeLayout.post(new Runnable () {
+                public void run () {
+                    relativeLayout.setBackgroundColor(Color.HSVToColor(0xff, values));
+                }
+            });
+        waitOneFullHardwareCycle();
         }
 
     }
-
 }

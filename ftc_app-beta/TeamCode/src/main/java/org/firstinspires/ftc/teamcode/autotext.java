@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.Servo;
  * Created by cxs on 2017/2/18.
  */
 
-@TeleOp(name="autoText", group="OpMode")
+@TeleOp(name="autoText")
 public class autotext extends OpMode {
 
     DcMotor leftmotor;
@@ -106,7 +106,7 @@ public class autotext extends OpMode {
             rightmotor.setPower(1);
 
             try {
-                Thread.sleep(1000);
+                Thread.sleep(800);
             }
             catch (InterruptedException e) {
                 e.printStackTrace();
