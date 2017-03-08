@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -9,8 +9,8 @@ import com.qualcomm.robotcore.hardware.Servo;
  * Created by cxs on 2017/2/18.
  */
 
-@TeleOp(name="autoText")
-public class autotext extends OpMode {
+@TeleOp(name = "autoText")
+public class autotext extends LinearOpMode {
 
     DcMotor leftmotor;
     DcMotor rightmotor;
@@ -19,10 +19,8 @@ public class autotext extends OpMode {
     Servo leftservo;
     Servo rightservo;
 
-    boolean haverun = false;
-
     @Override
-    public void init () {
+    public void runOpMode() throws InterruptedException {
         leftmotor = hardwareMap.dcMotor.get("leftmotor");
         rightmotor = hardwareMap.dcMotor.get("rightmotor");
         fire = hardwareMap.dcMotor.get("fire");
@@ -32,92 +30,79 @@ public class autotext extends OpMode {
 
         leftservo.setPosition(0);
         rightservo.setPosition(1);
-    }
 
-    @Override
-    public void loop () {
+        waitForStart();
 
-        if (haverun == false) {
 
-            try {
-                Thread.sleep(500);
-            }
-            catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
-            leftmotor.setPower(-1);
-            rightmotor.setPower(1);
+        leftmotor.setPower(-1);
+        rightmotor.setPower(1);
 
-            try {
-                Thread.sleep(1000);
-            }
-            catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
-            leftmotor.setPower(0);
-            rightmotor.setPower(0);
-            fire.setPower(1);
+        leftmotor.setPower(0);
+        rightmotor.setPower(0);
+        fire.setPower(1);
 
-            try {
-                Thread.sleep(100);
-            }
-            catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
-            fire.setPower(0);
+        fire.setPower(0);
 
-            for (double i = 0.01; i<=0.5; i += 0.01 ) {
-                leftservo.setPosition(i);
-                rightservo.setPosition(1.0-i);
-
-                try {
-                    Thread.sleep(50);
-                }
-                catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-            }
+        for (double i = 0.01; i <= 0.5; i += 0.01) {
+            leftservo.setPosition(i);
+            rightservo.setPosition(1.0 - i);
 
             try {
-                Thread.sleep(500);
-            }
-            catch (InterruptedException e) {
+                Thread.sleep(50);
+            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
-            leftservo.setPosition(0);
-            rightservo.setPosition(1);
-
-            fire.setPower(1);
-
-            try {
-                Thread.sleep(100);
-            }
-            catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            fire.setPower(0);
-            leftmotor.setPower(-1);
-            rightmotor.setPower(1);
-
-            try {
-                Thread.sleep(800);
-            }
-            catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            leftmotor.setPower(0);
-            rightmotor.setPower(0);
-
-            haverun = true;
 
         }
+
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        leftservo.setPosition(0);
+        rightservo.setPosition(1);
+
+        fire.setPower(1);
+
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        fire.setPower(0);
+        leftmotor.setPower(-1);
+        rightmotor.setPower(1);
+
+        try {
+            Thread.sleep(800);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        leftmotor.setPower(0);
+        rightmotor.setPower(0);
+
 
     }
 }

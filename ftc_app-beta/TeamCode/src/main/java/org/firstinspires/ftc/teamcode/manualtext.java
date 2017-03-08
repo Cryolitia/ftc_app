@@ -17,7 +17,7 @@ public class manualtext extends OpMode {
     DcMotor lift;
     DcMotor biglift;
     DcMotor hold;
-    DcMotor fire;
+    DcMotor firemotor;
 
     Servo leftservo;
     Servo rightservo;
@@ -32,7 +32,7 @@ public class manualtext extends OpMode {
         lift = hardwareMap.dcMotor.get("lift");
         biglift = hardwareMap.dcMotor.get("biglift");
         hold = hardwareMap.dcMotor.get("hold");
-        fire = hardwareMap.dcMotor.get("fire");
+        firemotor = hardwareMap.dcMotor.get("fire");
 
         leftservo = hardwareMap.servo.get("leftservo");
         rightservo = hardwareMap.servo.get("rightservo");
@@ -73,7 +73,7 @@ public class manualtext extends OpMode {
             }
         }
 
-        if (gamepad1.y) {
+        /*if (gamepad1.y) {
             fire.setPower(1);
             try {
                 Thread.sleep(100);
@@ -86,7 +86,8 @@ public class manualtext extends OpMode {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        } else if (gamepad1.x) {
+        } */
+        else if (gamepad1.x) {
             lift.setPower(-1);
         } else if (gamepad1.b) {
             lift.setPower(1);
@@ -122,7 +123,6 @@ public class manualtext extends OpMode {
             leftmotor.setPower(-1);
             rightmotor.setPower(-1);
         } else {
-            fire.setPower(0);
             hold.setPower(0);
             lift.setPower(0);
             biglift.setPower(0);

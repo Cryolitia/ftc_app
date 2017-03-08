@@ -12,7 +12,7 @@
 apply from: '../build.common.gradle'
 android {
     defaultConfig {
-        versionName '20170302'
+        versionName '20170308'
     }
     productFlavors {
     }
