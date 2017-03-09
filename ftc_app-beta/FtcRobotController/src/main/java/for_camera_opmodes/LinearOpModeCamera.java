@@ -71,7 +71,7 @@ public class LinearOpModeCamera extends LinearOpMode {
     for (int i = 0; i < numberOfCameras; i++) {
       Camera.CameraInfo info = new Camera.CameraInfo();
       Camera.getCameraInfo(i, info);
-      if (info.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) { // Camera.CameraInfo.CAMERA_FACING_FRONT or BACK
+      if (!(info.facing == Camera.CameraInfo.CAMERA_FACING_FRONT)) { // Camera.CameraInfo.CAMERA_FACING_FRONT or BACK
         cameraId = i;
         break;
       }
@@ -94,7 +94,7 @@ public class LinearOpModeCamera extends LinearOpMode {
     for (int i = 0; i < numberOfCameras; i++) {
       Camera.CameraInfo info = new Camera.CameraInfo();
       Camera.getCameraInfo(i, info);
-      if (info.facing == cameraInfoType) { // Camera.CameraInfo.CAMERA_FACING_FRONT or BACK
+      if (!(info.facing == cameraInfoType)) { // Camera.CameraInfo.CAMERA_FACING_FRONT or BACK
         cameraId = i;
         break;
       }
