@@ -4,6 +4,9 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.TouchSensor;
+
+import fire.startfire;
 
 /**
  * Created by cxs on 2017/2/3.
@@ -22,7 +25,11 @@ public class manualtext extends OpMode {
     Servo leftservo;
     Servo rightservo;
 
+    TouchSensor touch;
+
     double xa, ya, xb, yb;
+
+    startfire f = new startfire();
 
     @Override
     public void init() {
@@ -37,6 +44,10 @@ public class manualtext extends OpMode {
         leftservo = hardwareMap.servo.get("leftservo");
         rightservo = hardwareMap.servo.get("rightservo");
 
+        touch = hardwareMap.touchSensor.get("touch");
+
+        f.SetHardware(touch, firemotor);
+
     }
 
     @Override
@@ -44,6 +55,8 @@ public class manualtext extends OpMode {
 
         leftservo.setPosition(0);
         rightservo.setPosition(1);
+
+        f.init();
 
     }
 
@@ -73,20 +86,9 @@ public class manualtext extends OpMode {
             }
         }
 
-        /*if (gamepad1.y) {
-            fire.setPower(1);
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            fire.setPower(0);
-            try {
-                Thread.sleep(400);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        } */
+        if (gamepad1.y) {
+            f.start();
+        }
         else if (gamepad1.x) {
             lift.setPower(-1);
         } else if (gamepad1.b) {

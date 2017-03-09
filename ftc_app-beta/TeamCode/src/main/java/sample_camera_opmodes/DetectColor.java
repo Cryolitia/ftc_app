@@ -27,7 +27,7 @@ public class DetectColor extends OpModeCamera {
    */
   @Override
   public void init() {
-    setCameraDownsampling(8);
+    setCameraDownsampling(1);
     // parameter determines how downsampled you want your images
     // 8, 4, 2, or 1.
     // higher number is more downsampled, so less resolution but faster

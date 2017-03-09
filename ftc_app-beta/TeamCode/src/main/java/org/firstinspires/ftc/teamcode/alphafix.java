@@ -5,38 +5,28 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 
-import fire.startfire;
-
 /**
- * Created by FTC on 2017/3/8.
+ * Created by cxs on 2017/3/9.
  */
 
-@TeleOp(name = "alphaFireText")
-public class alphafiretext extends OpMode {
+@TeleOp (name = "alphaFix")
+public class alphafix extends OpMode {
 
-    TouchSensor touch;
     DcMotor firemotor;
-    startfire f = new startfire();
 
     @Override
     public void init () {
 
-        touch = hardwareMap.touchSensor.get("touch");
         firemotor = hardwareMap.dcMotor.get("fire");
 
-        f.SetHardware(touch, firemotor);
-
-    }
-
-    @Override
-    public void start () {
-        f.init();
     }
 
     @Override
     public void loop () {
 
-        if (gamepad1.y) f.start();
+        if (gamepad1.dpad_up) firemotor.setPower(1);
+        else if (gamepad1.dpad_down) firemotor.setPower(-1);
+        else firemotor.setPower(0);
 
     }
 
