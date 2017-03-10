@@ -6,8 +6,10 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DeviceInterfaceModule;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.TouchSensor;
 
 import for_camera_opmodes.LinearOpModeCamera;
+import fireandcolor.startfire;
 
 /**
  * Created by cxs on 2017/2/18.
@@ -23,7 +25,11 @@ public class autotext extends LinearOpModeCamera {
     Servo leftservo;
     Servo rightservo;
 
+    TouchSensor touch;
+
     DeviceInterfaceModule cdim;
+
+    startfire f = new startfire();
 
     int ds2 = 2;
 
@@ -36,10 +42,15 @@ public class autotext extends LinearOpModeCamera {
         leftservo = hardwareMap.servo.get("leftservo");
         rightservo = hardwareMap.servo.get("rightservo");
 
+        touch = hardwareMap.touchSensor.get("touch");
+
         cdim = hardwareMap.deviceInterfaceModule.get("dim");
 
         leftservo.setPosition(0);
         rightservo.setPosition(1);
+
+        f.SetHardware(touch, firemotor);
+        f.init();
 
         String colorString = "NONE";
 
@@ -68,55 +79,38 @@ public class autotext extends LinearOpModeCamera {
 
             waitForStart();
 
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            sleep(1000);
 
             leftmotor.setPower(-1);
             rightmotor.setPower(1);
 
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            sleep(1000);
 
             leftmotor.setPower(0);
             rightmotor.setPower(0);
+
+            f.run();
 
 
             for (double i = 0.01; i <= 0.5; i += 0.01) {
                 leftservo.setPosition(i);
                 rightservo.setPosition(1.0 - i);
 
-                try {
-                    Thread.sleep(50);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                sleep(25);
 
             }
 
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            sleep(500);
 
             leftservo.setPosition(0);
             rightservo.setPosition(1);
 
+            f.run();
 
             leftmotor.setPower(-1);
             rightmotor.setPower(1);
 
-            try {
-                Thread.sleep(800);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            sleep(1400);
 
             leftmotor.setPower(0);
             rightmotor.setPower(0);
@@ -157,7 +151,6 @@ public class autotext extends LinearOpModeCamera {
 
             telemetry.addData("Color:", "Color detected is: " + colorString);
             telemetry.update();
-            sleep(10);
 
             stopCamera();
         }

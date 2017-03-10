@@ -95,11 +95,7 @@ public class manualtext extends LinearOpMode {
                     if (leftservo.getPosition() < 0.5) {
                         leftservo.setPosition(leftservo.getPosition() + 0.02);
                         rightservo.setPosition(rightservo.getPosition() - 0.02);
-                        try {
-                            Thread.sleep(10);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+                        sleep(10);
                     }
                     telemetry.addData("left servo", leftservo.getPosition());
                     telemetry.addData("right servo", rightservo.getPosition());
