@@ -85,7 +85,7 @@ public class manualtext extends LinearOpMode {
             }
 
             if (gamepad1.y) {
-                f.run();
+                new Thread(f).start();
             } else if (gamepad1.x) {
                 lift.setPower(-1);
             } else if (gamepad1.b) {
@@ -110,7 +110,9 @@ public class manualtext extends LinearOpMode {
                 hold.setPower(0.3);
             } else if (gamepad2.dpad_down) {
                 hold.setPower(-0.3);
-            } else if (gamepad1.dpad_up) {
+            }
+            //全速开始
+            else if (gamepad1.dpad_up) {
                 leftmotor.setPower(-1);
                 rightmotor.setPower(1);
             } else if (gamepad1.dpad_down) {
@@ -122,7 +124,8 @@ public class manualtext extends LinearOpMode {
             } else if (gamepad1.dpad_right) {
                 leftmotor.setPower(-1);
                 rightmotor.setPower(-1);
-            } else {
+            } //全速结束
+             else {
                 hold.setPower(0);
                 lift.setPower(0);
                 biglift.setPower(0);

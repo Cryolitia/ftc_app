@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.TouchSensor;
  */
 
 @Disabled
-public class startfire {
+public class startfire implements Runnable {
     private TouchSensor touch;
     private DcMotor firemotor;
 
@@ -19,47 +19,51 @@ public class startfire {
 
         if (!haveinit) this.init();
         while (touch.isPressed()) {
-            firemotor.setPower(1);
+            firemotor.setPower(-1);
         }
         firemotor.setPower(0);
         haveinit = false;
         this.init();
+        return;
     }
 
     public void SetHardware(TouchSensor settouch, DcMotor setfire) {
 
         this.touch = settouch;
         this.firemotor = setfire;
+        return;
 
     }
 
     public void init() {
         while (!touch.isPressed()) {
-            firemotor.setPower(-0.5);
+            firemotor.setPower(0.5);
         }
         try {
             Thread.sleep(200);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        firemotor.setPower(1);
+        firemotor.setPower(-1);
         try {
-            Thread.sleep(2500);
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         firemotor.setPower(0);
         haveinit = true;
+        return;
     }
 
     public void release() {
 
         if (haveinit) {
             while (touch.isPressed()) {
-                firemotor.setPower(1);
+                firemotor.setPower(-1);
             }
             firemotor.setPower(0);
         }
+        return;
 
     }
 
