@@ -19,4 +19,4 @@ FTC2017 1362程序
 
 ![奖杯](https://raw.githubusercontent.com/singleNeuron/FTC-1362/master/images/IMG_1625.JPG)
 
-[被高通挂了...](https://zhuanlan.zhihu.com/p/25806936)
+[被高通挂知乎上了...](https://zhuanlan.zhihu.com/p/25806936)
