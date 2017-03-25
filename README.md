@@ -23,6 +23,7 @@ FTC2017 1362程序
 
 4月赴休斯顿参加全球决赛
 
-[被高通挂知乎上了...](https://zhuanlan.zhihu.com/p/25806936)
+被高通挂知乎上了...
+[机器人的超级联赛你看过吗？ -知乎专栏](https://zhuanlan.zhihu.com/p/25806936)
 
 ![奖杯](https://raw.githubusercontent.com/singleNeuron/FTC-1362/master/images/IMG_1625.JPG)
