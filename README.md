@@ -9,14 +9,14 @@ FTC2017 1362程序
 
 山东省实验中学铝热反应队
 
-![](https://raw.githubusercontent.com/singleNeuron/FTC-1362/master/images/17032211227853.jpg)
+![合影](https://raw.githubusercontent.com/singleNeuron/FTC-1362/master/images/17032211227853.jpg)
 
-## How we are
+## How're we
 
 2017北京赛启迪一等奖
 
 4月赴休斯顿参加全球决赛
 
-![](https://raw.githubusercontent.com/singleNeuron/FTC-1362/master/images/IMG_1625.JPG)
+![奖杯](https://raw.githubusercontent.com/singleNeuron/FTC-1362/master/images/IMG_1625.JPG)
 
 [被高通挂了...](https://zhuanlan.zhihu.com/p/25806936)
