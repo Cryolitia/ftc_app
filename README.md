@@ -3,7 +3,10 @@
 ## What's this
 
 FTC2017 1362程序
-开发环境Android Studio，颜色识别部分来自北美FTC论坛及https://github.com/cheer4ftc/OpModeCamera
+
+开发环境Android Studio
+
+颜色识别部分来自北美FTC论坛及https://github.com/cheer4ftc/OpModeCamera
 
 ## Who're we
 
