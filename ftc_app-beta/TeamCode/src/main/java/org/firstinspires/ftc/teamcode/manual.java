@@ -14,7 +14,7 @@ import fireandcolor.startfire;
  */
 
 @TeleOp(name = "manualText")
-public class manualtext extends LinearOpMode {
+public class manual extends LinearOpMode {
 
     DcMotor leftmotor;
     DcMotor rightmotor;
@@ -25,6 +25,7 @@ public class manualtext extends LinearOpMode {
 
     Servo leftservo;
     Servo rightservo;
+
 
     TouchSensor touch;
 
@@ -86,6 +87,7 @@ public class manualtext extends LinearOpMode {
 
             if (gamepad1.y) {
                 new Thread(f).start();
+                sleep(500);
             } else if (gamepad1.x) {
                 lift.setPower(-1);
             } else if (gamepad1.b) {
@@ -142,6 +144,9 @@ public class manualtext extends LinearOpMode {
         }
 
         f.release();
+        firemotor.setPower(0);
+        Thread.interrupted();
+        return;
     }
 
 
