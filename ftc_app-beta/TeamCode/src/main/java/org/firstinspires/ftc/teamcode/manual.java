@@ -9,11 +9,16 @@ import com.qualcomm.robotcore.hardware.TouchSensor;
 
 import fireandcolor.startfire;
 
+import static java.lang.Math.abs;
+import static java.lang.Math.atan2;
+import static java.lang.Math.sqrt;
+import static java.lang.Math.toDegrees;
+
 /**
  * Created by cxs on 2017/2/3.
  */
 
-@TeleOp(name = "manualText")
+@TeleOp(name = "Manual")
 public class manual extends LinearOpMode {
 
     DcMotor leftmotor;
@@ -31,7 +36,7 @@ public class manual extends LinearOpMode {
 
     DeviceInterfaceModule cdim;
 
-    double xa, ya, xb, yb;
+    double xa, ya, xb, yb, xc, yc, xd, yd, sign, r, s, axc, ayc, axd, ayd;
 
     startfire f = new startfire();
 
@@ -67,6 +72,11 @@ public class manual extends LinearOpMode {
             xb = gamepad2.left_stick_x;
             yb = gamepad2.left_stick_y;
 
+            xc = gamepad1.right_stick_x;
+            yc = gamepad1.right_stick_y;
+            xd = gamepad2.right_stick_x;
+            yd = gamepad2.right_stick_y;
+
             if (gamepad1.dpad_up == false && gamepad1.dpad_down == false && gamepad1.dpad_left == false && gamepad1.dpad_right == false) {
 
                 if (xa != 0 || ya != 0) {
@@ -79,7 +89,65 @@ public class manual extends LinearOpMode {
                     leftmotor.setPower(0 - ((yb + xb) / 2));
                 }
 
-                if (xa == 0 && xb == 0 && ya == 0 && yb == 0) {
+                if (xc!=0 || yc !=0) {
+
+                    if (xc != 0 && yc != 0) {
+                        axc = abs(xc);
+                        ayc = abs(yc);
+                        sign = yc / ayc;
+
+                        r = sign * (toDegrees(atan2(ayc, axc)) - 45) / 45;
+                        s = sign * (axc >= ayc ? (sqrt(2) * ayc) : (sqrt(2) * axc));
+
+                        if (xc * yc > 0) {
+                            leftmotor.setPower(s);
+                            rightmotor.setPower(-r);
+                        } else if (xc * yc < 0) {
+                            leftmotor.setPower(r);
+                            rightmotor.setPower(-s);
+                        }
+                    } else if (xc == 0 && yc != 0) {
+                        leftmotor.setPower(yc);
+                        rightmotor.setPower(-yc);
+                    } else if (xc != 0 && yc == 0) {
+                        leftmotor.setPower(xc);
+                        rightmotor.setPower(xc);
+                    } else if (xc == 0 && yc == 0) {
+                        leftmotor.setPower(0);
+                        rightmotor.setPower(0);
+                    }
+                }
+
+                if (xd!=0 || yd !=0) {
+
+                    if (xd != 0 && yd != 0) {
+                        axd = abs(xd);
+                        ayd = abs(yd);
+                        sign = yd / ayd;
+
+                        r = sign * (toDegrees(atan2(ayd, axd)) - 45) / 45;
+                        s = sign * (axd >= ayd ? (sqrt(2) * ayd) : (sqrt(2) * axd));
+
+                        if (xd * yd > 0) {
+                            leftmotor.setPower(-s);
+                            rightmotor.setPower(r);
+                        } else if (xd * yd < 0) {
+                            leftmotor.setPower(-r);
+                            rightmotor.setPower(s);
+                        }
+                    } else if (xd == 0 && yd != 0) {
+                        leftmotor.setPower(-yd);
+                        rightmotor.setPower(yd);
+                    } else if (xd != 0 && yd == 0) {
+                        leftmotor.setPower(-xd);
+                        rightmotor.setPower(-xd);
+                    } else if (xd == 0 && yd == 0) {
+                        leftmotor.setPower(0);
+                        rightmotor.setPower(0);
+                    }
+                }
+
+                if (xa == 0 && xb == 0 && ya == 0 && yb == 0 && xc == 0 && xd == 0 && yc == 0 && yd == 0) {
                     leftmotor.setPower(0);
                     rightmotor.setPower(0);
                 }
@@ -113,20 +181,6 @@ public class manual extends LinearOpMode {
             } else if (gamepad2.dpad_down) {
                 hold.setPower(-0.3);
             }
-            //全速开始
-            else if (gamepad1.dpad_up) {
-                leftmotor.setPower(-1);
-                rightmotor.setPower(1);
-            } else if (gamepad1.dpad_down) {
-                leftmotor.setPower(1);
-                rightmotor.setPower(-1);
-            } else if (gamepad1.dpad_left) {
-                leftmotor.setPower(1);
-                rightmotor.setPower(1);
-            } else if (gamepad1.dpad_right) {
-                leftmotor.setPower(-1);
-                rightmotor.setPower(-1);
-            } //全速结束
              else {
                 hold.setPower(0);
                 lift.setPower(0);
