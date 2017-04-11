@@ -77,81 +77,63 @@ public class manual extends LinearOpMode {
             xd = gamepad2.right_stick_x;
             yd = gamepad2.right_stick_y;
 
-            if (gamepad1.dpad_up == false && gamepad1.dpad_down == false && gamepad1.dpad_left == false && gamepad1.dpad_right == false) {
-
-                if (xa != 0 || ya != 0) {
-                    leftmotor.setPower((ya - xa) / 2);
-                    rightmotor.setPower(0 - ((ya + xa) / 2));
-                }
-
-                if (xb != 0 || yb != 0) {
-                    rightmotor.setPower((yb - xb) / 2);
-                    leftmotor.setPower(0 - ((yb + xb) / 2));
-                }
-
-                if (xc!=0 || yc !=0) {
-
-                    if (xc != 0 && yc != 0) {
-                        axc = abs(xc);
-                        ayc = abs(yc);
-                        sign = yc / ayc;
-
-                        r = sign * (toDegrees(atan2(ayc, axc)) - 45) / 45;
-                        s = sign * (axc >= ayc ? (sqrt(2) * ayc) : (sqrt(2) * axc));
-
-                        if (xc * yc > 0) {
-                            leftmotor.setPower(s);
-                            rightmotor.setPower(-r);
-                        } else if (xc * yc < 0) {
-                            leftmotor.setPower(r);
-                            rightmotor.setPower(-s);
-                        }
-                    } else if (xc == 0 && yc != 0) {
-                        leftmotor.setPower(yc);
-                        rightmotor.setPower(-yc);
-                    } else if (xc != 0 && yc == 0) {
-                        leftmotor.setPower(xc);
-                        rightmotor.setPower(xc);
-                    } else if (xc == 0 && yc == 0) {
-                        leftmotor.setPower(0);
-                        rightmotor.setPower(0);
+            if (xa != 0 || ya != 0) {
+            leftmotor.setPower((ya - xa) / 2);
+                rightmotor.setPower(0 - ((ya + xa) / 2));
+            }
+            else if (xb != 0 || yb != 0) {
+                rightmotor.setPower((yb - xb) / 2);
+                leftmotor.setPower(0 - ((yb + xb) / 2));
+            }
+            else if (xc != 0 || yc != 0) {
+                if (xc != 0 && yc != 0) {
+                    axc = abs(xc);
+                    ayc = abs(yc);
+                    sign = yc / ayc;
+                    r = sign * (toDegrees(atan2(ayc, axc)) - 45) / 45;
+                    s = sign * (axc >= ayc ? (sqrt(2) * ayc) : (sqrt(2) * axc));
+                    if (xc * yc > 0) {
+                        leftmotor.setPower(r);
+                        rightmotor.setPower(-s);
+                    } else if (xc * yc < 0) {
+                        leftmotor.setPower(s);
+                        rightmotor.setPower(-r);
                     }
-                }
-
-                if (xd!=0 || yd !=0) {
-
-                    if (xd != 0 && yd != 0) {
-                        axd = abs(xd);
-                        ayd = abs(yd);
-                        sign = yd / ayd;
-
-                        r = sign * (toDegrees(atan2(ayd, axd)) - 45) / 45;
-                        s = sign * (axd >= ayd ? (sqrt(2) * ayd) : (sqrt(2) * axd));
-
-                        if (xd * yd > 0) {
-                            leftmotor.setPower(-s);
-                            rightmotor.setPower(r);
-                        } else if (xd * yd < 0) {
-                            leftmotor.setPower(-r);
-                            rightmotor.setPower(s);
-                        }
-                    } else if (xd == 0 && yd != 0) {
-                        leftmotor.setPower(-yd);
-                        rightmotor.setPower(yd);
-                    } else if (xd != 0 && yd == 0) {
-                        leftmotor.setPower(-xd);
-                        rightmotor.setPower(-xd);
-                    } else if (xd == 0 && yd == 0) {
-                        leftmotor.setPower(0);
-                        rightmotor.setPower(0);
-                    }
-                }
-
-                if (xa == 0 && xb == 0 && ya == 0 && yb == 0 && xc == 0 && xd == 0 && yc == 0 && yd == 0) {
-                    leftmotor.setPower(0);
-                    rightmotor.setPower(0);
+                } else if (xc == 0) {
+                    leftmotor.setPower(yc);
+                    rightmotor.setPower(-yc);
+                } else {
+                    leftmotor.setPower(-xc);
+                    rightmotor.setPower(-xc);
                 }
             }
+            else if (xd != 0 || yd != 0) {
+                if (xd != 0 && yd != 0) {
+                    axd = abs(xd);
+                    ayd = abs(yd);
+                    sign = yd / ayd;
+                    r = sign * (toDegrees(atan2(ayd, axd)) - 45) / 45;
+                    s = sign * (axd >= ayd ? (sqrt(2) * ayd) : (sqrt(2) * axd));
+                    if (xd * yd > 0) {
+                    leftmotor.setPower(-s);
+                        rightmotor.setPower(r);
+                    } else if (xd * yd < 0) {
+                        leftmotor.setPower(-r);
+                        rightmotor.setPower(s);
+                    }
+                } else if (xd == 0) {
+                    leftmotor.setPower(-yd);
+                    rightmotor.setPower(yd);
+                } else {
+                leftmotor.setPower(-xd);
+                    rightmotor.setPower(-xd);
+                }
+            }
+            else {
+                leftmotor.setPower(0);
+                rightmotor.setPower(0);
+            }
+
 
             if (gamepad1.y) {
                 new Thread(f).start();
@@ -180,8 +162,7 @@ public class manual extends LinearOpMode {
                 hold.setPower(0.3);
             } else if (gamepad2.dpad_down) {
                 hold.setPower(-0.3);
-            }
-             else {
+            } else {
                 hold.setPower(0);
                 lift.setPower(0);
                 biglift.setPower(0);

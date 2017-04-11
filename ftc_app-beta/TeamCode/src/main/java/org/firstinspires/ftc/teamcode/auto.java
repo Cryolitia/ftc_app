@@ -49,6 +49,9 @@ public class auto extends LinearOpMode {
 
         f.SetHardware(touch, firemotor);
 
+        cdim.setLED(0, true);
+        cdim.setLED(1, true);
+
         waitForStart();
 
         sleep(500);

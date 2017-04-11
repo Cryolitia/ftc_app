@@ -40,14 +40,9 @@ public class startfire implements Runnable {
             firemotor.setPower(0.5);
         }
         try {
-            Thread.sleep(200);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            Thread.sleep(150);
         }
-        firemotor.setPower(-1);
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
+        catch (InterruptedException e) {
             e.printStackTrace();
         }
         firemotor.setPower(0);
