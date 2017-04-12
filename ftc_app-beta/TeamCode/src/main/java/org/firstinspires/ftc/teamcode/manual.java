@@ -61,6 +61,9 @@ public class manual extends LinearOpMode {
 
         waitForStart();
 
+        cdim.setLED(0,true);
+        cdim.setLED(1,true);
+
         leftservo.setPosition(0);
         rightservo.setPosition(1);
 
