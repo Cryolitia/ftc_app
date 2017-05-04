@@ -13,6 +13,9 @@ FTC2017 1362程序
 
 山东省实验中学铝热反应队
 
+中国区编号1362
+休斯敦编号12541
+
 ![合影](https://raw.githubusercontent.com/singleNeuron/FTC-1362/master/images/17032211227853.jpg)
 
 
