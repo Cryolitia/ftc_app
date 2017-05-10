@@ -26,7 +26,7 @@ FTC2017 1362程序
 
 4月赴休斯顿参加全球决赛
 
-[懒的搬图了自己去看吧...](cheer4ftc/OpModeCamera)
+[懒的搬图了自己去看吧...](http://sdshiyan.cn/html/c5/2017-04/5980.htm)
 
 被高通挂知乎上了...
 [机器人的超级联赛你看过吗？ -知乎专栏](https://zhuanlan.zhihu.com/p/25806936)
