@@ -1,3 +1,5 @@
+## 开发已转移到alpha分支
+
 # ftc_app
 FTC Android Studio project to create FTC Robot Controller app.
 
