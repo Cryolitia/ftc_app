@@ -13,7 +13,7 @@ import fireandcolor.startfire;
  * Created by cxs on 2017/2/18.
  */
 
-@TeleOp(name = "Auto")
+@Automous(name = "Auto")
 public class auto extends LinearOpMode {
 
     DcMotor leftmotor;
